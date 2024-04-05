@@ -28,7 +28,7 @@ function CreateTeacherPage() {
   return (
     <div className="container my-4 d-flex flex-column justify-content-center align-items-center h-100">
       <h4 className="mb-4">إنشاء حساب جديد:</h4>
-      {isError && <InputErrorMessage message={error.data.user.username} />}
+      {isError && <InputErrorMessage message={error?.data?.user?.username} />}
       <Formik
         initialValues={{
           username: "",

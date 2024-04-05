@@ -9,7 +9,7 @@ export const usersApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     createUser: builder.mutation({
       query: (initialUserData) => ({
-        url: "/users/teacher/register",
+        url: "/users/teacher/register/",
         method: "POST",
         body: { ...initialUserData, is_teacher: 1 },
       }),
@@ -17,7 +17,7 @@ export const usersApiSlice = apiSlice.injectEndpoints({
     }),
     getUserById: builder.query({
       query: (user_id) => ({
-        url: `/users/teacher/${user_id}`,
+        url: `/users/teacher/${user_id}/`,
       }),
       validateStatus: (response, result) => {
         return response.status === 200 && !result.isError;
@@ -33,7 +33,7 @@ export const usersApiSlice = apiSlice.injectEndpoints({
     }),
     editUser: builder.mutation({
       query: (teacher) => ({
-        url: `/users/teacher/${teacher.teacher_id}`,
+        url: `/users/teacher/${teacher.teacher_id}/`,
         method: "PATCH",
         body: teacher,
       }),
@@ -52,7 +52,7 @@ export const usersApiSlice = apiSlice.injectEndpoints({
     }),
     deleteUser: builder.mutation({
       query: (teacher_id) => ({
-        url: `users/teacher/${teacher_id}`,
+        url: `users/teacher/${teacher_id}/`,
         method: "DELETE",
       }),
       invalidatesTags: [{ type: "Teacher", id: "LIST" }],

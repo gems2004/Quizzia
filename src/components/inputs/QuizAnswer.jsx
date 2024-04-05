@@ -20,36 +20,36 @@ function QuizAnswer({
     });
   }
   return (
-    <div className="row mb-3">
-      <div className="row col-11">
-        <div className="input-group">
-          <label
-            htmlFor={props.id || props.name}
-            className="input-group-text col-auto"
-          >
-            {label}:
-          </label>
+    <div className="d-flex justify-content-around">
+      <div className="input-group row mb-3 max-width-95">
+        <label
+          htmlFor={props.id || props.name}
+          className="input-group-text col-auto"
+        >
+          {label}:
+        </label>
+        <input
+          className="form-control"
+          id={props.name}
+          autoComplete="false"
+          {...field}
+          {...props}
+        />
+        <div className="input-group-text col-auto ">
           <input
-            className="form-control"
-            id={props.name}
-            autoComplete="false"
-            {...field}
-            {...props}
+            className="form-check-input"
+            id={`${props.name}.is_correct`}
+            name={radio}
+            type="radio"
+            onChange={handleChange}
           />
-          <div className="input-group-text col-1">
-            <input
-              className="form-check-input"
-              id={`${props.name}.is_correct`}
-              name={radio}
-              type="radio"
-              onChange={handleChange}
-            />
-          </div>
         </div>
       </div>
       <img
-        src="/assets/delete.svg"
-        className="col-1 pointer"
+        src="/assets/x.svg"
+        width="20px"
+        height="20px"
+        className="pointer my-2"
         title="Remove Question"
         alt="Remove Question"
         onClick={remove}

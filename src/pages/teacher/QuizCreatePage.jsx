@@ -137,7 +137,7 @@ function QuizCreatePage() {
                 </>
               )}
             </FieldArray>
-            <button type="submit" className="btn btn-success">
+            <button type="submit" className="btn btn-success mx-4">
               حفظ الاختبار
             </button>
           </Form>

@@ -37,7 +37,7 @@ export const quizApiSlice = apiSlice.injectEndpoints({
       ],
     }),
     getQuizById: builder.query({
-      query: (quiz_id) => `/quiz/${quiz_id}`,
+      query: (quiz_id) => `/quiz/${quiz_id}/`,
     }),
     deleteQuiz: builder.mutation({
       query: (quiz_id) => ({
@@ -50,7 +50,7 @@ export const quizApiSlice = apiSlice.injectEndpoints({
       ],
     }),
     getStudentsRecord: builder.query({
-      query: (quiz_id) => `/quiz/teacher/record/${quiz_id}`,
+      query: (quiz_id) => `/quiz/teacher/record/${quiz_id}/`,
     }),
     studentRequest: builder.mutation({
       query: (initialData) => ({
@@ -58,9 +58,19 @@ export const quizApiSlice = apiSlice.injectEndpoints({
         method: "POST",
         body: { ...initialData },
       }),
+      invalidatesTags: [{ type: "Requests", id: "LIST" }],
     }),
     getQuizRequests: builder.query({
-      query: () => `quiz/teacher/requests`,
+      query: () => `quiz/teacher/requests/`,
+      providesTags: [{ type: "Requests", id: "LIST" }],
+    }),
+    approveRequest: builder.mutation({
+      query: ({ teacher_id, isApproved }) => ({
+        url: `/quiz/teacher/request/${teacher_id}/`,
+        method: "POST",
+        body: { approved: isApproved },
+      }),
+      invalidatesTags: [{ type: "Requests", id: "LIST" }],
     }),
   }),
 });
@@ -73,6 +83,7 @@ export const {
   useGetStudentsRecordQuery,
   useStudentRequestMutation,
   useGetQuizRequestsQuery,
+  useApproveRequestMutation,
 } = quizApiSlice;
 
 export const selectQuizzesResult =

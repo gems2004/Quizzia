@@ -8,7 +8,7 @@ const initialState = studentsAdapter.getInitialState();
 export const studentsApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getAllStudents: builder.query({
-      query: (id) => `/users/students/${id}`,
+      query: (id) => `/users/students/${id}/`,
       validateStatus: (response, result) => {
         return response.status === 200 && !result.isError;
       },
@@ -26,7 +26,7 @@ export const studentsApiSlice = apiSlice.injectEndpoints({
     }),
     getStudentById: builder.query({
       query: (studentId) => ({
-        url: `/users/student/${studentId}`,
+        url: `/users/student/${studentId}/`,
         validateStatus: (response, result) => {
           return response.status === 200 && !result.isError;
         },
@@ -42,7 +42,7 @@ export const studentsApiSlice = apiSlice.injectEndpoints({
     }),
     editStudentName: builder.mutation({
       query: (student) => ({
-        url: `/users/student/${student.id}`,
+        url: `/users/student/${student.id}/`,
         method: "PATCH",
         body: student,
       }),
@@ -50,7 +50,7 @@ export const studentsApiSlice = apiSlice.injectEndpoints({
     }),
     deleteStudent: builder.mutation({
       query: (id) => ({
-        url: `/users/student/${id}`,
+        url: `/users/student/${id}/`,
         method: "DELETE",
       }),
       invalidatesTags: [

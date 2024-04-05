@@ -11,6 +11,7 @@ import { jwtDecode } from "jwt-decode";
 function Prefetch() {
   const teacher_id = useSelector(selectTeacherId);
   const dispatch = useDispatch();
+  console.log(jwtDecode(localStorage.getItem("access")));
 
   useEffect(() => {
     if (localStorage.length > 0) {

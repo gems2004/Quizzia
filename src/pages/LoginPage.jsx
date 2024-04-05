@@ -24,6 +24,8 @@ const SignInSchema = Yup.object().shape({
 function LoginPage() {
   const [login, { isLoading, isSuccess, isError, error }] = useLoginMutation();
 
+  console.log(error);
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -74,6 +76,15 @@ function LoginPage() {
                 removable={false}
               />
             )}
+            {isError &&
+              (error.originalStatus === 500 ||
+                error.status === "FETCH_ERROR") && (
+                <Alert
+                  label="خطأ بالسيرفر. الرجاء المحاولة لاحقاً"
+                  color="danger small"
+                  removable={false}
+                />
+              )}
             <button
               type="submit"
               className={`btn ${

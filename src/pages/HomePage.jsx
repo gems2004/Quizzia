@@ -2,23 +2,14 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useGetUserByIdQuery } from "../features/users/usersApiSlice";
 import ErrorToken from "../components/ErrorToken";
-import {
-  selectRole,
-  selectTeacherId,
-  selectUserId,
-} from "../features/session/sessionSlice";
+import { selectRole, selectTeacherId } from "../features/session/sessionSlice";
 import { useSelector } from "react-redux";
 import QuizStartRequest from "../components/QuizStartRequest";
-import { useGetQuizRequestsQuery } from "../features/quizzes/quizApiSlice";
 
 function HomePage() {
   const teacher_id = useSelector(selectTeacherId);
   const role = useSelector(selectRole);
   const { data: info, isError, error } = useGetUserByIdQuery(teacher_id);
-
-  // const { data } = useGetQuizRequestsQuery();
-
-  // console.log(data);
 
   if (isError && error.status === 401) return <ErrorToken />;
 

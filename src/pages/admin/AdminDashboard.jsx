@@ -101,8 +101,11 @@ function AdminDashboard() {
         <Link to="register" className="btn btn-outline-primary">
           Add New Teacher
         </Link>
-        <Link to="bundle/new" className="btn btn-outline-secondary">
+        <Link to="bundle/new" className="btn btn-outline-dark">
           Add New Bundle
+        </Link>
+        <Link to="/" className="btn btn-outline-secondary">
+          Home Page
         </Link>
       </section>
     </div>

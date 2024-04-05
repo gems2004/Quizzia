@@ -4,14 +4,14 @@ export const authApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     login: builder.mutation({
       query: (initialUserData) => ({
-        url: "/users/teacher/token/",
+        url: "/users/token/",
         method: "POST",
         body: { ...initialUserData },
       }),
     }),
     createNewStudent: builder.mutation({
       query: (values) => ({
-        url: "/users/student/register",
+        url: "/users/student/register/",
         method: "POST",
         body: {
           user: {
@@ -28,7 +28,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
     }),
     sendLogout: builder.mutation({
       query: () => ({
-        url: "/users/teacher/logout",
+        url: "/users/teacher/logout/",
         method: "POST",
       }),
       async onQueryStarted(arg, { dispatch, queryFulfilled }) {
@@ -42,7 +42,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
     }),
     refresh: builder.mutation({
       query: (oldToken) => ({
-        url: "/users/teacher/token/refresh/",
+        url: "/users/token/refresh/",
         method: "POST",
         body: { refresh: oldToken },
       }),

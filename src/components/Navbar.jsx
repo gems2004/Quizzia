@@ -47,8 +47,8 @@ function Navbar() {
               </Link>
             )}
             {role === "Teacher" && (
-              <Link to="/quiz" className="nav-link">
-                قائمة الاختبارات
+              <Link to="/requests" className="nav-link">
+                قائمة الطلبات
               </Link>
             )}
             <Link to="/login" onClick={logout} className="nav-link">

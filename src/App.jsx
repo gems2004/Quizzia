@@ -23,6 +23,7 @@ import { selectRole } from "./features/session/sessionSlice";
 import QuizDetailsPage from "./pages/teacher/QuizDetailsPage";
 import RegisterPage from "./pages/RegisterPage";
 import { useEffect } from "react";
+import QuizRequestPage from "./pages/teacher/QuizRequestPage";
 
 function App() {
   const role = useSelector(selectRole);
@@ -51,6 +52,8 @@ function App() {
             ) : (
               <Route path="profile" element={<StudentPage />} />
             )}
+
+            <Route path="requests" element={<QuizRequestPage />} />
 
             <Route path="students">
               <Route path=":id" element={<StudentPage />} />

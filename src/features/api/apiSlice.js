@@ -19,7 +19,7 @@ const baseQueryWithReAuth = async (args, api, extraOptions) => {
   if (result?.error?.status === 401 && refresh) {
     const refreshResult = await baseQuery(
       {
-        url: "/users/teacher/token/refresh/",
+        url: "/users/token/refresh/",
         method: "POST",
         body: {
           refresh: refresh,
@@ -43,6 +43,6 @@ const baseQueryWithReAuth = async (args, api, extraOptions) => {
 
 export const apiSlice = createApi({
   baseQuery: baseQueryWithReAuth,
-  tagTypes: ["Teacher", "Bundles", "Student", "Quiz"],
+  tagTypes: ["Teacher", "Bundles", "Student", "Quiz", "Requests"],
   endpoints: (builder) => ({}),
 });

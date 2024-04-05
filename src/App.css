@@ -22,3 +22,6 @@
 .pointer {
   cursor: pointer !important;
 }
+.max-width-95 {
+  max-width: 95%;
+}
