@@ -24,6 +24,7 @@ import QuizDetailsPage from "./pages/teacher/QuizDetailsPage";
 import RegisterPage from "./pages/RegisterPage";
 import { useEffect } from "react";
 import QuizRequestPage from "./pages/teacher/QuizRequestPage";
+import StudentRequestsPage from "./pages/student/StudentRequestsPage";
 
 function App() {
   const role = useSelector(selectRole);
@@ -48,12 +49,16 @@ function App() {
             <Route index element={<HomePage />} />
 
             {role === "Teacher" ? (
-              <Route path="profile" element={<ProfilePage />} />
+              <>
+                <Route path="profile" element={<ProfilePage />} />
+                <Route path="requests" element={<QuizRequestPage />} />
+              </>
             ) : (
-              <Route path="profile" element={<StudentPage />} />
+              <>
+                <Route path="profile" element={<StudentPage />} />
+                <Route path="requests" element={<StudentRequestsPage />} />
+              </>
             )}
-
-            <Route path="requests" element={<QuizRequestPage />} />
 
             <Route path="students">
               <Route path=":id" element={<StudentPage />} />
