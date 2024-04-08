@@ -22,8 +22,9 @@ function Navbar() {
   return (
     <nav className="navbar navbar-expand-md bg-primary navbar-dark fixed-top">
       <div className="container">
-        <Link to="/" className="navbar-brand mb-0 h1">
-          Quizia
+        <Link to="/" className="navbar-brand mb-0 h1 d-flex align-items-end ">
+          uizia
+          <img src="final_white.png" width="30px" />
         </Link>
         <button
           className="navbar-toggler"
