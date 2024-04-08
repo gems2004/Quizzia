@@ -37,7 +37,7 @@ export const quizApiSlice = apiSlice.injectEndpoints({
       ],
     }),
     getQuizById: builder.query({
-      query: (quiz_id) => `/quiz/${quiz_id}/`,
+      query: (quiz_id) => `/quiz/${quiz_id}`,
     }),
     deleteQuiz: builder.mutation({
       query: (quiz_id) => ({
@@ -51,6 +51,9 @@ export const quizApiSlice = apiSlice.injectEndpoints({
     }),
     getStudentsRecord: builder.query({
       query: (quiz_id) => `/quiz/teacher/record/${quiz_id}/`,
+    }),
+    getStudentRequest: builder.query({
+      query: () => "quiz/student/request",
     }),
     studentRequest: builder.mutation({
       query: (initialData) => ({
@@ -81,6 +84,7 @@ export const {
   useGetQuizByIdQuery,
   useDeleteQuizMutation,
   useGetStudentsRecordQuery,
+  useGetStudentRequestQuery,
   useStudentRequestMutation,
   useGetQuizRequestsQuery,
   useApproveRequestMutation,
