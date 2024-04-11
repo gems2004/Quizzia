@@ -1,11 +1,7 @@
 import React from "react";
 import { Formik, Form, Field } from "formik";
 import { Link, useParams } from "react-router-dom";
-import {
-  selectQuizById,
-  useGetAllQuizzesQuery,
-  useGetQuizByIdQuery,
-} from "../../features/quizzes/quizApiSlice";
+import { useGetQuizByIdQuery } from "../../features/quizzes/quizApiSlice";
 import Spinner from "../../components/Spinner";
 import ErrorToken from "../../components/ErrorToken";
 
@@ -31,9 +27,9 @@ function QuizPage() {
           المدة: <span className="text-muted">{quiz.req_time} دقيقة</span>
         </p>
         <h2 className="my-4">
-          السؤال: {index}/{quiz.questions.length}
+          السؤال: {questionIndex + 1}/{quiz.questions.length}
         </h2>
-        <p className="lead">{quiz.questions[index - 1].question}</p>
+        <p className="lead">{quiz.questions[index].question}</p>
         <section>
           <Formik
             initialValues={{
@@ -43,35 +39,38 @@ function QuizPage() {
               if (Object.entries(values.questions).length < maxQuestions) {
                 alert("All Answers are required");
               }
+              console.log(values);
               setSubmitting(false);
             }}
           >
             <Form>
-              {quiz.questions[index - 1].answers.map((answer, answerIndex) => {
-                return (
-                  <div
-                    key={answerIndex}
-                    className="form-check form-check-inline"
-                  >
-                    <label
-                      htmlFor={`answer_${index - 1}_${answerIndex}`}
-                      className="form-check-label"
+              {quiz.questions[questionIndex].answers.map(
+                (answer, answerIndex) => {
+                  return (
+                    <div
+                      key={answerIndex}
+                      className="form-check form-check-inline"
                     >
-                      {answer.answer}
-                    </label>
-                    <Field
-                      id={`answer_${index - 1}_${answerIndex}`}
-                      type="radio"
-                      name={`questions[${index - 1}]`}
-                      value={answer.answer}
-                      className="form-check-input"
-                    />
-                  </div>
-                );
-              })}
+                      <label
+                        htmlFor={`answer_${questionIndex}_${answerIndex}`}
+                        className="form-check-label"
+                      >
+                        {answer.answer}
+                      </label>
+                      <Field
+                        id={`answer_${questionIndex}_${answerIndex}`}
+                        type="radio"
+                        name={`questions[${questionIndex}]`}
+                        value={answer.answer}
+                        className="form-check-input"
+                      />
+                    </div>
+                  );
+                }
+              )}
               <button
                 type="submit"
-                className={`btn btn-primary d-block mt my-4`}
+                className={`btn btn-primary d-block mt my-4 ${""}`}
               >
                 Submit
               </button>
@@ -80,42 +79,47 @@ function QuizPage() {
         </section>
         <nav aria-label="Quiz navigation" className="mt-auto">
           <ul className="pagination justify-content-center">
-            <li className={`page-item ${index === "1" ? "d-none" : ""}`}>
+            {/* Go to first */}
+            <li className={questionIndex <= 0 ? "d-none" : "page-item"}>
               <Link
                 className="page-link"
-                to={`/quiz/${id}/1`}
+                to={`/quiz/${id}/0`}
                 aria-label="Previous"
               >
                 <span aria-hidden="true">&laquo;</span>
               </Link>
             </li>
-            <li className={`page-item ${index === "1" ? "d-none" : ""}`}>
+            {/* Go to prev */}
+            <li className={questionIndex <= 0 ? "d-none" : "page-item"}>
               <Link
                 className="page-link"
                 to={`/quiz/${id}/${questionIndex - 1}`}
               >
-                {questionIndex - 1}
+                {questionIndex}
               </Link>
             </li>
+            {/* Current */}
             <li className="page-item disabled">
               <Link className="page-link" to={`/quiz/${id}/${index}`}>
-                {index}
-              </Link>
-            </li>
-            <li className="page-item">
-              <Link
-                className={`page-link ${
-                  questionIndex + 1 > maxQuestions ? "d-none" : ""
-                }`}
-                to={`/quiz/${id}/${questionIndex + 1}`}
-              >
                 {questionIndex + 1}
               </Link>
             </li>
+            {/* Go to next */}
+            <li className="page-item">
+              <Link
+                className={`page-link ${
+                  questionIndex + 1 >= maxQuestions ? "d-none" : ""
+                }`}
+                to={`/quiz/${id}/${questionIndex + 1}`}
+              >
+                {questionIndex + 2}
+              </Link>
+            </li>
+            {/* Go to last */}
             <li
-              className={`page-item ${
-                questionIndex === maxQuestions ? "d-none" : ""
-              }`}
+              className={
+                questionIndex === maxQuestions - 1 ? "d-none" : "page-item"
+              }
             >
               <Link
                 className="page-link"
