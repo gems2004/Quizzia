@@ -31,6 +31,7 @@ function QuizRequestPage() {
             return (
               <QuizRequestItem
                 key={request.id}
+                request_id={request.id}
                 student_name={request.student_data.fullname}
                 student_id={request.student_data.id}
                 quiz_name={request.quiz_data.name}
