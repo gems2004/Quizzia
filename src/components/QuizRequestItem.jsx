@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { selectTeacherId } from "../features/session/sessionSlice";
 
 function QuizRequestItem({
+  request_id,
   student_name,
   student_id,
   quiz_name,
@@ -31,12 +32,13 @@ function QuizRequestItem({
       </p>
       <div className="btn-group">
         <button
-          className={`btn btn-outline-success ${since > 15 ? "disabled" : ""}`}
+          className={`btn btn-outline-success ${since > 30 ? "disabled" : ""}`}
           onClick={() =>
             approveRequest({
-              teacher_id: teacher_id,
+              request_id: request_id,
               student: student_id,
               quiz_token: token,
+              isApproved: true,
             })
           }
         >
@@ -45,8 +47,9 @@ function QuizRequestItem({
         <button
           className="btn btn-outline-danger"
           onClick={() =>
-            declineRequest({
-              teacher_id: teacher_id,
+            approveRequest({
+              request_id: request_id,
+              isApproved: false,
               student: student_id,
               quiz_token: token,
             })
