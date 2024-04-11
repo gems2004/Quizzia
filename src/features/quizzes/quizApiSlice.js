@@ -54,6 +54,9 @@ export const quizApiSlice = apiSlice.injectEndpoints({
     }),
     getStudentRequest: builder.query({
       query: () => "quiz/student/request",
+      transformResponse: (response) => {
+        return response.sort((a, b) => b.id - a.id);
+      },
     }),
     studentRequest: builder.mutation({
       query: (initialData) => ({
@@ -68,12 +71,22 @@ export const quizApiSlice = apiSlice.injectEndpoints({
       providesTags: [{ type: "Requests", id: "LIST" }],
     }),
     approveRequest: builder.mutation({
-      query: ({ teacher_id, isApproved }) => ({
-        url: `/quiz/teacher/request/${teacher_id}/`,
+      query: ({ request_id, isApproved, student, quiz_token }) => ({
+        url: `/quiz/teacher/request/${request_id}/`,
         method: "POST",
-        body: { approved: isApproved },
+        body: {
+          approved: isApproved,
+          student: student,
+          quiz_token: quiz_token,
+        },
       }),
       invalidatesTags: [{ type: "Requests", id: "LIST" }],
+    }),
+    startQuiz: builder.mutation({
+      query: () => ({
+        url: "/quiz/student/start/",
+        method: "POST",
+      }),
     }),
   }),
 });
@@ -88,6 +101,7 @@ export const {
   useStudentRequestMutation,
   useGetQuizRequestsQuery,
   useApproveRequestMutation,
+  useStartQuizMutation,
 } = quizApiSlice;
 
 export const selectQuizzesResult =
