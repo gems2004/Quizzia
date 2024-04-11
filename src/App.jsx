@@ -31,6 +31,7 @@ function App() {
 
   return (
     <>
+      <Prefetch />
       <Routes>
         <Route path="/admin">
           <Route index element={<AdminDashboard />} />
@@ -44,39 +45,36 @@ function App() {
         <Route path="/register" element={<RegisterPage />} />
 
         <Route path="/" element={<Layout />}>
-          {/* Prefetch data for faster loading times */}
-          <Route element={<Prefetch />}>
-            <Route index element={<HomePage />} />
+          <Route index element={<HomePage />} />
 
-            {role === "Teacher" ? (
-              <>
-                <Route path="profile" element={<ProfilePage />} />
-                <Route path="requests" element={<QuizRequestPage />} />
-              </>
-            ) : (
-              <>
-                <Route path="profile" element={<StudentPage />} />
-                <Route path="requests" element={<StudentRequestsPage />} />
-              </>
-            )}
+          {role === "Teacher" ? (
+            <>
+              <Route path="profile" element={<ProfilePage />} />
+              <Route path="requests" element={<QuizRequestPage />} />
+            </>
+          ) : (
+            <>
+              <Route path="profile" element={<StudentPage />} />
+              <Route path="requests" element={<StudentRequestsPage />} />
+            </>
+          )}
 
-            <Route path="students">
-              <Route path=":id" element={<StudentPage />} />
-            </Route>
-
-            <Route path="quiz">
-              <Route index element={<QuizListPage />} />
-              <Route path="create" element={<QuizCreatePage />} />
-              {role === "Student" ? (
-                <Route path=":id/:index" element={<QuizPage />} />
-              ) : (
-                <Route path=":id" element={<QuizDetailsPage />} />
-              )}
-            </Route>
-
-            <Route path="about" element={<AboutPage />} />
-            <Route path="bundles" element={<BundlesPage />} />
+          <Route path="students">
+            <Route path=":id" element={<StudentPage />} />
           </Route>
+
+          <Route path="quiz">
+            <Route index element={<QuizListPage />} />
+            <Route path="create" element={<QuizCreatePage />} />
+            {role === "Student" ? (
+              <Route path=":id/:index" element={<QuizPage />} />
+            ) : (
+              <Route path=":id" element={<QuizDetailsPage />} />
+            )}
+          </Route>
+
+          <Route path="about" element={<AboutPage />} />
+          <Route path="bundles" element={<BundlesPage />} />
         </Route>
 
         <Route path="*" element={<NotFound />} />
