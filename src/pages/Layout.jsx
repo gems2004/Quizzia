@@ -1,12 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Navbar from "../components/Navbar";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import Footer from "../components/Footer";
 import LoginPage from "./LoginPage";
 
 function Layout() {
-  const navigate = useNavigate();
-
   if (localStorage.length <= 0) return <LoginPage />;
 
   return (
