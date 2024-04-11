@@ -47,7 +47,7 @@ function Navbar() {
                 الملف الشخصي
               </Link>
             )}
-            {role === "Teacher" && (
+            {(role === "Teacher" || role === "Student") && (
               <Link to="/requests" className="nav-link">
                 قائمة الطلبات
               </Link>
