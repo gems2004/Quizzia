@@ -24,8 +24,6 @@ const SignInSchema = Yup.object().shape({
 function LoginPage() {
   const [login, { isLoading, isSuccess, isError, error }] = useLoginMutation();
 
-  console.log(error);
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -39,7 +37,7 @@ function LoginPage() {
             const tokens = await login(values).unwrap();
             localStorage.setItem("refresh", tokens.refresh);
             localStorage.setItem("access", tokens.access);
-            // dispatch(setSessionData(jwtDecode(localStorage.getItem("access"))));
+            dispatch(setSessionData(jwtDecode(localStorage.getItem("access"))));
             navigate("/");
           } catch (err) {
             console.log(err);
