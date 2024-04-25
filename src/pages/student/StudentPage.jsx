@@ -1,18 +1,20 @@
 import React, { useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   useDeleteStudentMutation,
   useEditStudentNameMutation,
   useGetStudentByIdQuery,
 } from "../../features/students/studentsApiSlice";
 import Spinner from "../../components/Spinner";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import DeleteAccount from "../../components/DeleteAccount";
 import ErrorToken from "../../components/ErrorToken";
 import { selectStudentId } from "../../features/session/sessionSlice";
+import { apiSlice } from "../../features/api/apiSlice";
 
 function StudentPage() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const student_id = useSelector(selectStudentId);
 
@@ -30,12 +32,17 @@ function StudentPage() {
   const [deleteStudent] = useDeleteStudentMutation();
 
   async function handleEditName(e) {
-    // await editStudentName({ id, fullname: editedName, fk_teacher: teacher_id });
+    e.preventDefault();
+    await editStudentName({
+      student_id,
+      fullname: editedName,
+    });
   }
-
   async function handleDelete() {
-    // deleteStudent(id);
-    navigate("/students");
+    await deleteStudent(student_id);
+    localStorage.clear();
+    dispatch(apiSlice.util.resetApiState());
+    navigate("/login");
   }
 
   if (isLoading) return <Spinner />;
