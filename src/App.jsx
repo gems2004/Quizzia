@@ -1,8 +1,7 @@
 import "./App.css";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import ProfilePage from "./pages/teacher/ProfilePage";
-// import StudentsListPage from "./pages/StudentsListPage";
 import AboutPage from "./pages/AboutPage";
 import BundlesPage from "./pages/BundlesPage";
 import StudentPage from "./pages/student/StudentPage";
@@ -18,11 +17,10 @@ import Layout from "./pages/Layout";
 import EditBundlePage from "./pages/admin/EditBundlePage";
 import EditTeacherPage from "./pages/admin/EditTeacherPage";
 import NotFound from "./components/NotFound";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { selectRole } from "./features/session/sessionSlice";
 import QuizDetailsPage from "./pages/teacher/QuizDetailsPage";
 import RegisterPage from "./pages/RegisterPage";
-import { useEffect } from "react";
 import QuizRequestPage from "./pages/teacher/QuizRequestPage";
 import StudentRequestsPage from "./pages/student/StudentRequestsPage";
 

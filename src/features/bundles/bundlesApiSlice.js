@@ -1,4 +1,4 @@
-import { createEntityAdapter, createSelector } from "@reduxjs/toolkit";
+import { createEntityAdapter } from "@reduxjs/toolkit";
 import { apiSlice } from "../api/apiSlice";
 
 const bundlesAdapter = createEntityAdapter({});

@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { store } from "../../app/store";
-import { studentsApiSlice } from "../students/studentsApiSlice";
 import { Outlet } from "react-router-dom";
 import { usersApiSlice } from "../users/usersApiSlice";
 import { useSelector } from "react-redux";
@@ -16,10 +15,12 @@ function Prefetch() {
   const teacher_id = useSelector(selectTeacherId);
   const role = useSelector(selectRole);
   const dispatch = useDispatch();
-  console.log(jwtDecode(localStorage.getItem("access")));
 
   useEffect(() => {
-    if (localStorage.length > 0) {
+    if (
+      localStorage.length > 0 &&
+      (localStorage.key(0) === "access" || localStorage.key(1) === "access")
+    ) {
       dispatch(setSessionData(jwtDecode(localStorage.getItem("access"))));
     }
   }, [localStorage.length]);

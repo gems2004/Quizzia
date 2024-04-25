@@ -1,6 +1,5 @@
 import React from "react";
 import QuizStartRequest from "../../components/QuizStartRequest";
-import { useGetStudentRequestQuery } from "../../features/quizzes/quizApiSlice";
 
 function StudentUi() {
   return (
