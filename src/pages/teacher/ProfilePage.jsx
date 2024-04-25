@@ -29,8 +29,6 @@ function ProfilePage() {
 
   const navigate = useNavigate();
   function handleLogout() {
-    // logout();
-
     dispatch(apiSlice.util.resetApiState());
     localStorage.clear();
     navigate("/login");
@@ -57,10 +55,6 @@ function ProfilePage() {
                   fullname: values.fullname,
                   subject: values.subject,
                   teacher_id: teacher_id,
-                  user: {
-                    username: teacher.user.username,
-                    password: values.password,
-                  },
                 });
                 // window.location.reload();
               }}
