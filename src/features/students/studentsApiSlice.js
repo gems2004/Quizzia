@@ -42,7 +42,7 @@ export const studentsApiSlice = apiSlice.injectEndpoints({
     }),
     editStudentName: builder.mutation({
       query: (student) => ({
-        url: `/users/student/${student.id}/`,
+        url: `/users/student/${student.student_id}`,
         method: "PATCH",
         body: student,
       }),
@@ -50,7 +50,7 @@ export const studentsApiSlice = apiSlice.injectEndpoints({
     }),
     deleteStudent: builder.mutation({
       query: (id) => ({
-        url: `/users/student/${id}/`,
+        url: `/users/student/${id}`,
         method: "DELETE",
       }),
       invalidatesTags: [
