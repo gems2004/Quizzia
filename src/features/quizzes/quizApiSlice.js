@@ -50,7 +50,7 @@ export const quizApiSlice = apiSlice.injectEndpoints({
       ],
     }),
     getStudentsRecord: builder.query({
-      query: (quiz_id) => `/quiz/teacher/record/${quiz_id}/`,
+      query: (quiz_id) => `/quiz/teacher/record/${quiz_id}`,
     }),
     getStudentRequest: builder.query({
       query: () => "quiz/student/request",
@@ -88,6 +88,18 @@ export const quizApiSlice = apiSlice.injectEndpoints({
         method: "POST",
       }),
     }),
+    submitQuiz: builder.mutation({
+      query: ({ chosenAnswers, quiz_id, student_id, time_spent }) => ({
+        url: "/quiz/student/submit/",
+        method: "POST",
+        body: {
+          chosen: chosenAnswers,
+          fk_quiz_id: quiz_id,
+          fk_student_id: student_id,
+          time_spent: time_spent,
+        },
+      }),
+    }),
   }),
 });
 
@@ -102,6 +114,7 @@ export const {
   useGetQuizRequestsQuery,
   useApproveRequestMutation,
   useStartQuizMutation,
+  useSubmitQuizMutation,
 } = quizApiSlice;
 
 export const selectQuizzesResult =
