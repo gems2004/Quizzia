@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   useGetStudentRequestQuery,
   useStartQuizMutation,
@@ -13,8 +13,6 @@ function StudentRequestsPage() {
 
   const navigate = useNavigate();
 
-  const [numOfUnRenderedElements, setNumOfUnRenderedElements] = useState(0);
-
   async function startingQuiz(quiz_id) {
     await startQuiz();
     navigate(`/quiz/${quiz_id}/0`);
@@ -24,7 +22,7 @@ function StudentRequestsPage() {
   return (
     <div className="container my-4" id="requests-list">
       <h4 className="my-4">قائمة الطلبات:</h4>
-      {requests.length <= 0 ? (
+      {requests?.length <= 0 ? (
         <p className="lead">لا يوجد طلبات</p>
       ) : (
         <div className="list-group">
@@ -34,7 +32,6 @@ function StudentRequestsPage() {
             const dif = now.diff(request_date, "minutes");
 
             if (dif > 90) {
-              // setNumOfUnRenderedElements((prev) => prev + 1);
               return;
             }
             return (
