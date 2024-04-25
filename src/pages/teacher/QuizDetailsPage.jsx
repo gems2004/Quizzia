@@ -28,24 +28,26 @@ function QuizDetailsPage() {
   const recordContent = (
     <section className="container my-4">
       <h4>معلومات الطلاب:</h4>
-      <table className="table table-striped">
+      <table className="table table-striped text-center ">
         <thead>
           <tr>
             <th>رقم الطالب</th>
             <th>الاسم</th>
             <th>الدرجة</th>
-            <th>الدرجة</th>
-            <th>الدرجة</th>
+            <th>المدة</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
+          {record?.map((recordItem) => {
+            return (
+              <tr key={recordItem.id}>
+                <td>{recordItem.student.id}</td>
+                <td>{recordItem.student.fullname}</td>
+                <td>{recordItem.grade}</td>
+                <td>{recordItem.time_spent}</td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </section>
