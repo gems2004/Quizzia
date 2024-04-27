@@ -29,7 +29,7 @@ function QuizPage() {
 
   useEffect(() => {
     setCurrentQuestion(quiz?.questions[index]);
-  }, [index]);
+  }, [index, quiz]);
 
   const maxQuestions = quiz?.questions?.length;
   const questionIndex = parseInt(index);
@@ -38,16 +38,20 @@ function QuizPage() {
 
   if (isSuccess) {
     return (
-      <div className="container my-4 d-flex flex-column h-100">
+      <div className="container d-flex flex-column h-100">
         <p className="h4 my-4">
           المدة: <span className="text-muted">{quiz.req_time} دقيقة</span>
         </p>
         <h2 className="my-4">
           السؤال: {questionIndex + 1}/{quiz.questions.length}
         </h2>
-        <p className="lead">{currentQuestion.question}</p>
-        {currentQuestion.image && (
-          <img src={currentQuestion.image} draggable={false} />
+        <p className="lead">{currentQuestion?.question}</p>
+        {currentQuestion?.image && (
+          <img
+            src={currentQuestion?.image}
+            draggable={false}
+            alt="صورة السؤال"
+          />
         )}
         <section>
           <Formik
@@ -71,18 +75,18 @@ function QuizPage() {
           >
             {({ values }) => (
               <Form>
-                <ol id="answers-list" className="list-group mt-4">
-                  {currentQuestion.answers.map((answer, answerIndex) => {
+                <div id="answers-list" className="mt-4">
+                  {currentQuestion?.answers.map((answer, answerIndex) => {
                     return (
-                      <li
+                      <div
                         key={answerIndex}
-                        className="form-check answer-item list-group-item p-0"
+                        className="form-check answer-item p-0"
                       >
                         <Field
                           id={`answer_${questionIndex}_${answerIndex}`}
                           type="radio"
                           name={`answers[${questionIndex}]`}
-                          value={answer.id + "/" + currentQuestion.id}
+                          value={answer.id + "/" + currentQuestion?.id}
                           className="form-check-input quiz-answer-input d-none"
                         />
                         <label
@@ -92,11 +96,11 @@ function QuizPage() {
                         >
                           {answer.answer}
                         </label>
-                      </li>
+                      </div>
                     );
                   })}
-                </ol>
-                <nav aria-label="Quiz navigation" className="my-5 py-5">
+                </div>
+                <nav aria-label="Quiz navigation" className="my-5">
                   <ul className="pagination justify-content-center">
                     {/* Go to first */}
                     <li className={questionIndex <= 0 ? "d-none" : "page-item"}>
