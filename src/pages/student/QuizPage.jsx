@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Formik, Form, Field } from "formik";
 import { Link, useParams } from "react-router-dom";
 import {
@@ -23,6 +23,14 @@ function QuizPage() {
   const [submitQuiz, { isSuccess: isSubmitSuccess }] = useSubmitQuizMutation();
   const student_id = useSelector(selectStudentId);
 
+  const [currentQuestion, setCurrentQuestion] = useState(
+    quiz?.questions[index]
+  );
+
+  useEffect(() => {
+    setCurrentQuestion(quiz?.questions[index]);
+  }, [index]);
+
   const maxQuestions = quiz?.questions?.length;
   const questionIndex = parseInt(index);
 
@@ -37,9 +45,9 @@ function QuizPage() {
         <h2 className="my-4">
           السؤال: {questionIndex + 1}/{quiz.questions.length}
         </h2>
-        <p className="lead">{quiz?.questions[index]?.question}</p>
-        {quiz?.questions[index]?.image && (
-          <img src={quiz?.questions[index]?.image} draggable={false} />
+        <p className="lead">{currentQuestion.question}</p>
+        {currentQuestion.image && (
+          <img src={currentQuestion.image} draggable={false} />
         )}
         <section>
           <Formik
@@ -64,35 +72,29 @@ function QuizPage() {
             {({ values }) => (
               <Form>
                 <ol id="answers-list" className="list-group mt-4">
-                  {quiz?.questions[questionIndex]?.answers.map(
-                    (answer, answerIndex) => {
-                      return (
-                        <li
-                          key={answerIndex}
-                          className="form-check answer-item list-group-item p-0"
+                  {currentQuestion.answers.map((answer, answerIndex) => {
+                    return (
+                      <li
+                        key={answerIndex}
+                        className="form-check answer-item list-group-item p-0"
+                      >
+                        <Field
+                          id={`answer_${questionIndex}_${answerIndex}`}
+                          type="radio"
+                          name={`answers[${questionIndex}]`}
+                          value={answer.id + "/" + currentQuestion.id}
+                          className="form-check-input quiz-answer-input d-none"
+                        />
+                        <label
+                          // onClick={selectAnswer}
+                          htmlFor={`answer_${questionIndex}_${answerIndex}`}
+                          className="form-check-label pointer quiz-answer py-2 px-3 w-100"
                         >
-                          <Field
-                            id={`answer_${questionIndex}_${answerIndex}`}
-                            type="radio"
-                            name={`answers[${questionIndex}]`}
-                            value={
-                              answer.id +
-                              "/" +
-                              quiz?.questions[questionIndex].id
-                            }
-                            className="form-check-input quiz-answer-input d-none"
-                          />
-                          <label
-                            // onClick={selectAnswer}
-                            htmlFor={`answer_${questionIndex}_${answerIndex}`}
-                            className="form-check-label pointer quiz-answer py-2 px-3 w-100"
-                          >
-                            {answer.answer}
-                          </label>
-                        </li>
-                      );
-                    }
-                  )}
+                          {answer.answer}
+                        </label>
+                      </li>
+                    );
+                  })}
                 </ol>
                 <nav aria-label="Quiz navigation" className="my-5 py-5">
                   <ul className="pagination justify-content-center">
