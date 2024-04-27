@@ -84,6 +84,19 @@ function QuizCreatePage() {
                         placeholder="ادخل السؤال"
                         remove={() => remove(index)}
                       />
+                      <div className="mb-3">
+                        <label
+                          for={`questionPhoto_${index}`}
+                          className="form-label"
+                        >
+                          إضافة صورة للسؤال
+                        </label>
+                        <input
+                          className="form-control"
+                          type="file"
+                          id={`questionPhoto_${index}`}
+                        />
+                      </div>
 
                       <FieldArray name={`quiz.${index}.answers`}>
                         {({ push: pushAnswer, remove: removeAnswer }) => (
