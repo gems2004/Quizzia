@@ -38,6 +38,9 @@ function QuizPage() {
           السؤال: {questionIndex + 1}/{quiz.questions.length}
         </h2>
         <p className="lead">{quiz?.questions[index]?.question}</p>
+        {quiz?.questions[index]?.image && (
+          <img src={quiz?.questions[index]?.image} draggable={false} />
+        )}
         <section>
           <Formik
             initialValues={{
