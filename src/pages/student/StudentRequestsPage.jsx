@@ -20,7 +20,7 @@ function StudentRequestsPage() {
 
   if (isLoading) return <Spinner />;
   return (
-    <div className="container my-4" id="requests-list">
+    <div className="container-md my-4" id="requests-list">
       <h4 className="my-4">قائمة الطلبات:</h4>
       {requests?.length <= 0 ? (
         <p className="lead">لا يوجد طلبات</p>
@@ -36,25 +36,25 @@ function StudentRequestsPage() {
             }
             return (
               <div
-                className="list-group-item d-flex align-items-center justify-content-around "
+                className="list-group-item d-flex align-items-center justify-content-around flex-wrap"
                 key={request.id}
               >
-                <p className="mb-0">
+                <p className="my-3">
                   اسم الاختبار:
                   <span className="text-muted"> {request.quiz_data.name}</span>
                 </p>
-                <p className="mb-0">
+                <p className="my-3">
                   المدة:
                   <span className="text-muted">
                     {" "}
                     {request.quiz_data.req_time} دقيقة
                   </span>
                 </p>
-                <p className="mb-0">
+                <p className="my-3">
                   منذ:
                   <span className="text-muted"> {dif} دقيقة</span>
                 </p>
-                <p className="mb-0">
+                <p className="my-3">
                   الحالة:
                   <span
                     className={
