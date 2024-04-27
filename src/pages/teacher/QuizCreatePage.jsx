@@ -143,58 +143,6 @@ function QuizCreatePage() {
           </Form>
         )}
       </Formik>
-
-      {/* <nav aria-label="Quiz navigation" className="mt-auto">
-        <ul className="pagination justify-content-center">
-          <li className={`page-item ${question == "1" ? "d-none" : ""}`}>
-            <Link
-              className="page-link"
-              to={`/quiz/create/1`}
-              aria-label="First"
-            >
-              <span aria-hidden="true">&laquo;</span>
-            </Link>
-          </li>
-          <li className={`page-item ${question == "1" ? "d-none" : ""}`}>
-            <Link
-              className="page-link"
-              to={`/quiz/create/${question - 1}`}
-              aria-label="Previous"
-            >
-              {question - 1}
-            </Link>
-          </li>
-          <li className="page-item disabled">
-            <Link className="page-link" to={`/quiz/create/${question}`}>
-              {question}
-            </Link>
-          </li>
-          <li className="page-item">
-            <Link
-              className={`page-link ${
-                question + 1 > numberOfQuestions ? "d-none" : ""
-              }`}
-              to={`/quiz/create/${question + 1}`}
-              aria-label="Next"
-            >
-              {question + 1}
-            </Link>
-          </li>
-          <li
-            className={`page-item ${
-              question + 1 > numberOfQuestions ? "d-none" : ""
-            }`}
-          >
-            <Link
-              className="page-link"
-              to={`/quiz/create/${question}`}
-              aria-label="Last"
-            >
-              <span aria-hidden="true">&raquo;</span>
-            </Link>
-          </li>
-        </ul>
-      </nav> */}
     </div>
   );
 }
