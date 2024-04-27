@@ -25,7 +25,18 @@
 .max-width-95 {
   max-width: 95%;
 }
-
+#answers-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.answer-item {
+  border: 1px solid #6c757d;
+  border-radius: 5px;
+}
+.answer-item > label {
+  font-size: 1.05rem;
+}
 .answer-item:has(input:checked) {
   background-color: #0d6efd;
   color: white;
