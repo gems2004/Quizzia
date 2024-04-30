@@ -15,13 +15,11 @@ function Prefetch() {
   const teacher_id = useSelector(selectTeacherId);
   const role = useSelector(selectRole);
   const dispatch = useDispatch();
+  const access = localStorage.getItem("access");
 
   useEffect(() => {
-    if (
-      localStorage.length > 0 &&
-      (localStorage.key(0) === "access" || localStorage.key(1) === "access")
-    ) {
-      dispatch(setSessionData(jwtDecode(localStorage.getItem("access"))));
+    if (access) {
+      dispatch(setSessionData(jwtDecode(access)));
     }
   }, [localStorage.length]);
 
